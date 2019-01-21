@@ -1,5 +1,7 @@
 const { ApolloServer } = require("apollo-server");
 const isEmail = require("isEmail");
+const cors = require("cors");
+const helmet = require("helmet");
 
 const typeDefs = require("./schema");
 const { createStore } = require("./utils");
@@ -23,14 +25,17 @@ const server = new ApolloServer({
   },
   typeDefs,
   resolvers,
+  engine: {
+    apiKey: "service:holdeelocks:XtKdhrE7hs8TTDdXFGJ09w"
+  },
   dataSources: () => ({
     launchAPI: new LaunchAPI(),
     userAPI: new UserAPi({ store })
-  }),
-  engine: {
-    apiKey: "service:holdeelocks:XtKdhrE7hs8TTDdXFGJ09w"
-  }
+  })
 });
+
+server.use(cors());
+server.use(helmet());
 
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
