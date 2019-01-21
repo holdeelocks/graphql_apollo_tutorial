@@ -26,7 +26,10 @@ const server = new ApolloServer({
   dataSources: () => ({
     launchAPI: new LaunchAPI(),
     userAPI: new UserAPi({ store })
-  })
+  }),
+  engine: {
+    apiKey: "service:holdeelocks:XtKdhrE7hs8TTDdXFGJ09w"
+  }
 });
 
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
