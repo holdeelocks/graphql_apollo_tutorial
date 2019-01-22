@@ -7,6 +7,18 @@ const typeDefs = gql`
     me: User
   }
 
+  type Mutation {
+    bookTrips(launchIds: [ID]!): TripUpdateResponse!
+    cancelTrip(launchId: ID!): TripUpdateResponse!
+    login(email: String): String
+  }
+
+  type TripUpdateResponse {
+    success: Boolean!
+    message: String
+    launches: [Launch]
+  }
+
   type LaunchConnection {
     cursor: String!
     hasMore: Boolean!
@@ -41,18 +53,6 @@ const typeDefs = gql`
   enum PatchSize {
     SMALL
     LARGE
-  }
-
-  type Mutation {
-    bookTrips(launchIds: [ID]!): TripUpdateResponse!
-    cancelTrip(launchId: ID!): TripUpdateResponse!
-    login(email: String): String
-  }
-
-  type TripUpdateResponse {
-    success: Boolean!
-    message: String
-    launches: [Launch]
   }
 `;
 
