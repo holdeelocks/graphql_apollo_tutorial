@@ -43,6 +43,6 @@ const server = new ApolloServer({
 const app = express();
 server.applyMiddleware({ app });
 
-app.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
-  console.log(`🚀 Server ready at ${url}`);
+app.listen({ port: process.env.PORT || 4000 }, () => {
+  console.log(`🚀 Server ready at ${process.env.PORT || 4000}`);
 });
