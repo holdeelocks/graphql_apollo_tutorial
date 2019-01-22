@@ -4,7 +4,7 @@ import { HttpLink } from "apollo-link-http";
 import gql from "graphql-tag";
 
 const link = new HttpLink({
-  uri: "https://graphql-holden.herokuapp.com/"
+  uri: "http://localhost:4000"
 });
 
 const client = new ApolloClient({
