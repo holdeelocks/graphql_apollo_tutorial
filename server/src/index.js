@@ -1,7 +1,7 @@
 const { ApolloServer } = require("apollo-server");
 const isEmail = require("isEmail");
-const cors = require("cors");
-const helmet = require("helmet");
+// const cors = require("cors");
+// const helmet = require("helmet");
 
 const typeDefs = require("./schema");
 const { createStore } = require("./utils");
@@ -25,17 +25,24 @@ const server = new ApolloServer({
   },
   typeDefs,
   resolvers,
-  engine: {
-    apiKey: "service:holdeelocks:XtKdhrE7hs8TTDdXFGJ09w"
-  },
   dataSources: () => ({
     launchAPI: new LaunchAPI(),
     userAPI: new UserAPi({ store })
-  })
+  }),
+  playground: {
+    endpoint: `https://graphql-holden.herokuapp.com/`,
+    settings: {
+      "editor.theme": "dark"
+    }
+  },
+  engine: {
+    apiKey: "service:holdeelocks:XtKdhrE7hs8TTDdXFGJ09w"
+  },
+  introspection: true
 });
 
-server.use(cors());
-server.use(helmet());
+// server.use(cors());
+// server.use(helmet());
 
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
