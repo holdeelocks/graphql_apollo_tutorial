@@ -1,7 +1,6 @@
-const { ApolloServer } = require("apollo-server");
+const { ApolloServer } = require("apollo-server-express");
 const isEmail = require("isEmail");
-// const cors = require("cors");
-// const helmet = require("helmet");
+const express = require("express");
 
 const typeDefs = require("./schema");
 const { createStore } = require("./utils");
@@ -41,8 +40,8 @@ const server = new ApolloServer({
   introspection: true
 });
 
-// server.use(cors());
-// server.use(helmet());
+const app = express();
+server.applyMiddleware({ app });
 
 server.listen({ port: process.env.PORT || 4000 }).then(({ url }) => {
   console.log(`🚀 Server ready at ${url}`);
