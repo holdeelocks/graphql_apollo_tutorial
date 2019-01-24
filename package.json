@@ -6,8 +6,7 @@
 	"scripts": {
 		"test": "jest",
 		"start": "node src/index.js",
-		"start:ci": "node src/index.js",
-		"heroku-postbuild": "cd client && yarn && yarn run build"
+		"start:ci": "node src/index.js"
 	},
 	"author": "",
 	"license": "ISC",

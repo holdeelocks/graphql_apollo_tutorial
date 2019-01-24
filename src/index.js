@@ -1,7 +1,7 @@
 const { ApolloServer } = require('apollo-server');
 const isEmail = require('isemail');
-const express = require('express');
-const path = require('path');
+// const express = require('express');
+// const path = require('path');
 
 const typeDefs = require('./schema');
 const resolvers = require('./resolvers');
@@ -37,7 +37,7 @@ const server = new ApolloServer({
 	introspection: true,
 	playground: true,
 	engine: {
-		apiKey: process.env.ENGINE_API_KEY,
+		apiKey: process.env.ENGINE_API_KEY || 'service:holdeelocks:XtKdhrE7hs8TTDdXFGJ09w',
 		...internalEngineDemo
 	}
 });
@@ -48,6 +48,12 @@ if (process.env.NODE_ENV !== 'test')
 		.then(() =>
 			console.log(`🚀 Server ready at ${process.env.NODE_ENV || process.env.PORT || 4000}`)
 		);
+
+// server.use(express.static(path.join(__dirname, '/client/build')));
+
+// server.get('*', (req, res) => {
+// 	res.sendFile(path.join(__dirname + '/client/build/index.html'));
+// });
 
 module.exports = {
 	dataSources,
